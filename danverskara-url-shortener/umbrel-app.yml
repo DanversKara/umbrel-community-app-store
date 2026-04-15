@@ -1,6 +1,40 @@
+manifestVersion: 1
 id: danverskara-url-shortener
-name: Premium URL Shortener
-description: A professional URL shortening deployment wrapper. Requires separate software purchase from GemPixel. Check README.md for more info about how to buy this
-category: Utilities
-version: 1.0.0
-icon: icon.png
+name: Premium URL Shortener (wrapper)
+tagline: A professional URL shortening deployment wrapper. Requires separate software purchase from GemPixel.
+icon:
+category: Networking
+version: "1.0.0"
+port: 2583
+description: >-
+  ⚠️ Legal Notice & Software Licensing
+This repository is a Deployment Wrapper only
+
+This project provides the necessary infrastructure, environment configurations, and Docker orchestration required to run the Premium URL Shortener on Umbrel.
+
+Please be advised of the following
+
+Source Code: This repository does not contain the proprietary source code, binaries, or database schemas of the Premium URL Shortener.
+
+Licensing: To utilize this wrapper, you must possess a valid license and the official software package provided by GemPixel.
+
+Acquisition: The software must be purchased directly from the official developer. 
+
+You can acquire the software and review the licensing terms here:
+Purchase Product: https://gempixel.com/products/premium-url-shortener
+Licensing Terms: https://gempixel.com/licenses
+
+This wrapper is provided "as-is" for the convenience of the community. The maintainer of this repository is not affiliated with GemPixel and does not distribute or sell their proprietary software.*
+
+developer: DanversKara
+website: https://github.com/dockur/windows
+dependencies: []
+repo: https://github.com/DanversKara/umbrel-community-app-store
+support: https://github.com/DanversKara/umbrel-community-app-store/issues
+gallery:
+  - 
+releaseNotes: This repository is a Deployment Wrapper only - YOU MUST BUY THE SOFTWARE FROM gempixel in order for this to work unless you wanna use it for something else.
+defaultUsername: "check_docker-compose.yml"
+defaultPassword: "check_docker-compose.yml"
+submitter: DanversKara
+submission: https://github.com/DanversKara/umbrel-community-app-store
