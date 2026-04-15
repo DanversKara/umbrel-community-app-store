@@ -232,80 +232,87 @@ curl -X POST http://YOUR-UMBREL-IP:2583/xrpc/com.atproto.server.createAccount \
 
 ## 🔗 Premium URL Shortener Setup Guide
 
-> ⚠️ **This app does NOT include the Premium URL Shortener software.**
-> You must purchase your own license and download the software yourself.
-> This wrapper is NOT affiliated with or endorsed by GemPixel.
 
-### Step 1 — Purchase a License
+Yes, this is absolutely possible. You have already done the "hard part" (figuring out the dependencies and the database). Converting this into an Umbrel Community App is essentially just a matter of wrapping your working blueprint into the specific folder structure that Umbrel requires.
+Umbrel doesn't use a standard docker-compose.yml; it uses a specific metadata file (umbrel-app.yml) and a modified compose file so that the Umbrel OS can handle the networking (reverse proxy) and storage.
+Here is the blueprint to convert your working setup into an Umbrel Community App.
+1. The Umbrel App Structure
+You need to organize your GitHub repository exactly like this:
+code
+Text
+danverskara-url-shortener/
+├── Dockerfile              <-- (The "Ultimate" Dockerfile we created)
+├── docker-compose.yml      <-- (Modified for Umbrel)
+├── umbrel-app.yml          <-- (The metadata file for the App Store)
+└── icon.png                <-- (A 512x512 icon for the store)
+2. The umbrel-app.yml (The Identity Card)
+This is the file Umbrel uses to list your app in the store. Create this file in your repo:
+code
+Yaml
+id: danverskara-url-shortener
+name: Premium URL Shortener
+description: A professional, high-performance URL shortening service.
+category: Utilities
+version: 1.0.0
+# This is the icon that appears in the Umbrel dashboard
+icon: icon.png
+3. The docker-compose.yml (Modified for Umbrel)
+Umbrel handles ports and networking automatically. You do not map ports like 8085:80. Instead, you leave the container on port 80, and Umbrel's proxy handles the rest.
+Use this version for Umbrel:
+code
+Yaml
+version: '3'
+services:
+  web:
+    build: .
+    container_name: urlshortener_web
+    restart: unless-stopped
+    # No ports section here! Umbrel manages this.
+    volumes:
+      - /data/storage/apps/danverskara-url-shortener/app:/var/www/html
+    environment:
+      - WEB_DOCUMENT_ROOT=/var/www/html/public
+    depends_on:
+      - db
+    networks:
+      - default
 
-Buy from CodeCanyon: https://codecanyon.net/item/premium-url-shortener/3688135
+  db:
+    image: mariadb:11
+    container_name: urlshortener_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: shortener
+      MYSQL_USER: shortener
+      MYSQL_PASSWORD: shortenerpass
+    volumes:
+      - /data/storage/apps/danverskara-url-shortener/db:/var/lib/mysql
+    networks:
+      - default
 
-- Log into codecanyon.net → Downloads → find Premium URL Shortener
-- Click **Download → License Certificate and Purchase Code** (save the PDF — you need the code inside)
-- Click **Download → Installable PHP Script** (save `main.zip`)
+networks:
+  default:
+4. The Dockerfile
+Use the exact same "Ultimate" Dockerfile we created in the previous step. Do not change it; it's already perfect.
+5. How to handle your "Upload Files and SQL later"
+Since you are putting this on GitHub for the App Store, you probably don't want to put your private config.php or your full SQL dump in a public repo.
+Here is the workflow for the user (or you):
+Install the app from the Umbrel Store.
+The app will start, but it will be "broken" (White page/Error) because the files and DB are empty.
+Use an SSH client or the Umbrel File Manager to go to:
+/data/storage/apps/danverskara-url-shortener/app
+Upload your PHP files and config.php there.
+Import the SQL using the same command we used before:
+code
+Bash
+docker exec -i urlshortener_db mariadb -u shortener -pshortenerpass shortener < /data/storage/apps/danverskara-url-shortener/app/your-db-dump.sql
 
-### Step 2 — Install the App from Umbrel App Store
-
-Once installed, Umbrel creates your data folder at:
-```
-~/umbrel/app-data/danverskara-urlshortener/app/
-```
-
-### Step 3 — Upload Your ZIP via SCP
-
-From Windows PowerShell:
-```powershell
-scp main.zip umbrel@umbrel.local:~/umbrel/app-data/danverskara-urlshortener/app/
-```
-
-### Step 4 — Extract and Fix Permissions on Umbrel via SSH
-
-```bash
-cd ~/umbrel/app-data/danverskara-urlshortener/app/
-unzip main.zip
-sudo chown -R www-data:www-data .
-sudo chmod -R 755 .
-sudo chmod -R 777 storage
-sudo mkdir -p public/content
-sudo chmod -R 777 public/content
-sudo chmod 666 config.sample.php
-```
-
-### Step 5 — Run the Web Installer
-
-Visit: `http://umbrel.local:8085`
-
-Use these database settings:
-
-| Field | Value |
-|-------|-------|
-| Host | `db` |
-| Database | `shortener` |
-| Username | `shortener` |
-| Password | *(shown in your Umbrel app settings page)* |
-| Prefix | `pus_` |
-
-Enter your Envato purchase code from the PDF when prompted.
-
-### Step 6 — Done!
-
-Log into your admin panel at `http://umbrel.local:8085/admin`
-
----
-
-## 🛠️ Troubleshooting
-
-| Error | Fix |
-|-------|-----|
-| App stuck at 1% / fails to install | KVM is not available — see [KVM Requirement](#️-kvm-requirement) above |
-| `error gathering device information while adding custom device "/dev/kvm"` | Enable virtualisation in BIOS or Proxmox — see [KVM Requirement](#️-kvm-requirement) |
-| `Must configure plc rotation key` | Add `PDS_PLC_ROTATION_KEY_K256_PRIVATE_KEY_HEX` to docker-compose.yml (see Step 3) |
-| `Domain name must not end with ".local"` | Set `PDS_HOSTNAME` to a real public domain (see Step 2) |
-| `InvalidInviteCode` | Generate an invite code first (see Step 6) |
-| App not showing in community store | Check that the app `id` in `umbrel-app.yml` matches the folder name, and that it's listed in `umbrel-app-store.yml` |
-| VM booting over network after CPU change | Fix boot order in Proxmox: **Options → Boot Order**, move disk to top |
-| URL Shortener 500 error | App files not extracted — complete Steps 3 and 4 of URL Shortener setup |
-| URL Shortener purchase code not working | GemPixel servers may be down — check https://status.gempixel.com and retry |
+🛠 Final Action Plan for your GitHub
+Clean up: Go to your GitHub repo and delete all the old, non-working files.
+Upload: Push the 4 files listed in the structure above (Dockerfile, docker-compose.yml, umbrel-app.yml, and icon.png).
+The App Store: Since you are using the umbrel-community-app-store repository, Umbrel will see your umbrel-app.yml and the docker-compose.yml, and it will allow users to "Install" it.
+Customization: Because we used /data/storage/apps/danverskara-url-shortener/ in the compose file, Umbrel will automatically create those folders on the user's hard drive, making it very easy for you to upload your files via SFTP later.
 
 ---
 
