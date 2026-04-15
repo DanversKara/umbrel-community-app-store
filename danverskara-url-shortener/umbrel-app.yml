@@ -38,7 +38,7 @@ description: >-
 developer: DanversKara
 website: https://github.com/DanversKara/umbrel-community-app-store
 dependencies: []
-repo: https://github.com/DanversKara/umbrel-community-app-store
+repo: https://github.com/DanversKara/umbrel-community-app-store/tree/main/danverskara-url-shortener
 support: https://github.com/DanversKara/umbrel-community-app-store/issues
 gallery:
   - https://raw.githubusercontent.com/DanversKara/umbrel-community-app-store/main/danverskara-url-shortener/gallery/1.png
