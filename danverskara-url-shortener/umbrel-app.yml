@@ -44,7 +44,8 @@ gallery:
   - https://raw.githubusercontent.com/DanversKara/umbrel-community-app-store/main/danverskara-url-shortener/gallery/1.png
 releaseNotes: >-
   v1.1.0 — Complete architecture rewrite.
-ReadMe.Md: https://github.com/DanversKara/umbrel-community-app-store/blob/main/danverskara-url-shortener/ReadMe.md
+  
+  - ReadMe.Md GemPixel license/Files Requirement https://github.com/DanversKara/umbrel-community-app-store/blob/main/danverskara-url-shortener/ReadMe.md
   - Replaced broken setup container with real two-port design (public + admin)
   - Fixed Dockerfile (was a docker exec command, now a real PHP 8.2 build)
   - Installs all required extensions: pdo_mysql, gd, imagick, mbstring, zip
