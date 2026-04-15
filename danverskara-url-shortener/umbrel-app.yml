@@ -1,0 +1,7 @@
+id: danverskara-url-shortener
+name: Premium URL Shortener
+description: A professional, high-performance URL shortening service.
+category: Utilities
+version: 1.0.0
+# This is the icon that appears in the Umbrel dashboard
+icon: icon.png
