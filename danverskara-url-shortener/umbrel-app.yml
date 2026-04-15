@@ -45,7 +45,7 @@ gallery:
 releaseNotes: >-
   v1.1.0 — Complete architecture rewrite.
   
-  - README.MD GemPixel license/Files Requirement (if you cant click this/copy this link -> click on SOURCE/REPO LINK ABOVE https://github.com/DanversKara/umbrel-community-app-store/blob/main/danverskara-url-shortener/ReadMe.md
+  - README.MD GemPixel license/Files Requiremen, click on SOURCE CODE/REPO LINK Above to view README.MD
   
   - Replaced broken setup container with real two-port design (public + admin)
   
