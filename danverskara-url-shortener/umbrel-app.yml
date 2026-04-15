@@ -7,7 +7,7 @@ category: Networking
 version: "1.0.0"
 port: 3002
 description: >-
-  A self-hosted Personal wrapper — requires your own GemPixel license and files from GemPixel (Go Read The ReadMe.MD for more info) powered by PHP 8.2 + MariaDB 11.
+  A self-hosted Personal wrapper — requires your own GemPixel license and files from GemPixel (Go Read The README.MD BELOW for more info) powered by PHP 8.2 + MariaDB 11.
 
 
   TWO-PORT DESIGN:
@@ -45,7 +45,7 @@ gallery:
 releaseNotes: >-
   v1.1.0 — Complete architecture rewrite.
   
-  - ReadMe.Md GemPixel license/Files Requirement https://github.com/DanversKara/umbrel-community-app-store/blob/main/danverskara-url-shortener/ReadMe.md
+  - README.MD GemPixel license/Files Requirement https://github.com/DanversKara/umbrel-community-app-store/blob/main/danverskara-url-shortener/ReadMe.md
   
   - Replaced broken setup container with real two-port design (public + admin)
   
