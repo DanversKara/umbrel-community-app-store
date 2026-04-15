@@ -2,7 +2,7 @@ id: danverskara-url-shortener
 name: Premium URL Shortener wrapper
 tagline: Requires separate software purchase from GemPixel.
 icon:
-category: Utilities
+category: Networking
 version: 1.0.0
 description: test
 developer: DanversKara
@@ -13,7 +13,5 @@ support: https://github.com/DanversKara/umbrel-community-app-store/issues
 gallery:
   - 
 releaseNotes: This repository is a Deployment Wrapper only - YOU MUST BUY THE SOFTWARE FROM gempixel in order for this to work unless you wanna use it for something else.
-defaultUsername: "check_docker-compose.yml"
-defaultPassword: "check_docker-compose.yml"
 submitter: DanversKara
 submission: https://github.com/DanversKara/umbrel-community-app-store
