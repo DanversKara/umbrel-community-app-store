@@ -268,6 +268,18 @@ Once your files are uploaded, import your database backup (`.sql` file) by runni
 ```bash
 docker exec -i urlshortener_db mariadb -u shortener -pshortenerpass shortener < /data/storage/apps/danverskara-url-shortener/app/your-db-dump.sql
 ```
+
+⚠️ Legal Notice & Software Licensing
+This repository is a Deployment Wrapper only.
+This project provides the necessary infrastructure, environment configurations, and Docker orchestration required to run the Premium URL Shortener on Umbrel.
+Please be advised of the following:
+Source Code: This repository does not contain the proprietary source code, binaries, or database schemas of the Premium URL Shortener.
+Licensing: To utilize this wrapper, you must possess a valid license and the official software package provided by GemPixel.
+Acquisition: The software must be purchased directly from the official developer. You can acquire the software and review the licensing terms here:
+🛒 Purchase Product: GemPixel Premium URL Shortener: https://www.google.com/url?sa=E&q=https%3A%2F%2Fgempixel.com%2Fproducts%2Fpremium-url-shortener
+📜 Licensing Terms: GemPixel Licenses: https://www.google.com/url?sa=E&q=https%3A%2F%2Fgempixel.com%2Flicenses
+This wrapper is provided "as-is" for the convenience of the community. The maintainer of this repository is not affiliated with GemPixel and does not distribute or sell their proprietary software.
+
 ---
 
 ## 📄 License
