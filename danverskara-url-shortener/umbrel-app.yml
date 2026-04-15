@@ -4,8 +4,7 @@ tagline: Requires separate software purchase from GemPixel.
 icon:
 category: Utilities
 version: 1.0.0
-description:
-  -
+description: test
 developer: DanversKara
 website: https://github.com/dockur/windows
 dependencies: []
