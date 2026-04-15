@@ -1,11 +1,9 @@
-manifestVersion: 1
 id: danverskara-url-shortener
-name: Premium URL Shortener (wrapper)
-tagline: A professional URL shortening deployment wrapper. Requires separate software purchase from GemPixel.
+name: Premium URL Shortener wrapper
+tagline: Requires separate software purchase from GemPixel.
 icon:
 category: Networking
 version: "1.0.0"
-port: 2583
 description: >-
   ⚠️ Legal Notice & Software Licensing
 This repository is a Deployment Wrapper only
