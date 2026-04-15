@@ -1,0 +1,32 @@
+version: '3'
+services:
+  web:
+    build: .
+    container_name: urlshortener_web
+    restart: unless-stopped
+    # No ports section here! Umbrel manages this.
+    volumes:
+      - /data/storage/apps/danverskara-url-shortener/app:/var/www/html
+    environment:
+      - WEB_DOCUMENT_ROOT=/var/www/html/public
+    depends_on:
+      - db
+    networks:
+      - default
+
+  db:
+    image: mariadb:11
+    container_name: urlshortener_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: shortener
+      MYSQL_USER: shortener
+      MYSQL_PASSWORD: shortenerpass
+    volumes:
+      - /data/storage/apps/danverskara-url-shortener/db:/var/lib/mysql
+    networks:
+      - default
+
+networks:
+  default:
