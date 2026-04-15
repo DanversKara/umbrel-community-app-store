@@ -1,0 +1,61 @@
+services:
+  app:
+    image: webdevops/php-apache:8.2
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT}:80"
+    volumes:
+      - "${APP_DATA_DIR}/app:/app"
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: shortener
+      DB_USER: shortener
+      DB_PASS: ${APP_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - shortener-net
+
+  setup:
+    image: danverskara/url-shortener-setup:latest
+    restart: unless-stopped
+    ports:
+      - "${APP_SETUP_PORT}:80"
+    volumes:
+      - "${APP_DATA_DIR}/app:/app-data"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: shortener
+      DB_USER: shortener
+      DB_PASS: ${APP_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - shortener-net
+
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${APP_PASSWORD}
+      MYSQL_DATABASE: shortener
+      MYSQL_USER: shortener
+      MYSQL_PASSWORD: ${APP_PASSWORD}
+    volumes:
+      - "${APP_DATA_DIR}/db:/var/lib/mysql"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - shortener-net
+
+networks:
+  shortener-net:

@@ -1,0 +1,140 @@
+manifestVersion: 1
+id: danverskara-dockur-windows-11
+name: Windows 11 Pro
+tagline: Run Windows 11 Pro in a container on your Umbrel
+icon: https://raw.githubusercontent.com/dockur/windows/master/.github/logo.png
+category: utilities
+version: "1.0.0"
+port: 8006
+description: >-
+  Run a full Windows 11 Pro virtual machine directly on your Umbrel using
+  dockur/windows — an open-source Docker container with KVM acceleration
+  and a built-in web-based remote desktop viewer.
+
+
+  ✅ Fully automated installation — just open the app and Windows installs
+  itself. No USB, no ISO, no manual steps.
+
+
+  🖥️ Access the Windows desktop from your browser at http://umbrel.local:8006
+  or connect with any RDP client on port 3389.
+
+
+  📁 Files can be shared between your Umbrel host and Windows via the
+  Shared folder on the Windows desktop.
+
+
+  ⚙️ Default resources: 4 GB RAM · 2 CPU cores · 64 GB disk.
+
+
+  🔐 Default credentials — Username: Docker  /  Password: admin
+
+
+  ════════════════════════════════════════
+  ⚠️ REQUIREMENTS
+  ════════════════════════════════════════
+
+  - x86_64 host only — Raspberry Pi and ARM are NOT supported
+  - KVM must be available on your host
+  - Intel VT-x or AMD-V must be enabled in BIOS/UEFI
+  - 8 GB+ RAM and 80 GB+ free disk recommended
+
+  Check if KVM is available via SSH:
+    ls -la /dev/kvm
+
+  If /dev/kvm exists you are good. If not, follow the fix below.
+
+
+  ════════════════════════════════════════
+  KVM SETUP — BARE METAL (PC)
+  ════════════════════════════════════════
+
+  If Umbrel is installed directly on a PC:
+
+  1. Reboot and enter BIOS/UEFI (usually Delete, F2, or F12 at startup)
+  2. Find the virtualisation setting labelled one of:
+       AMD SVM Mode / AMD-V  (AMD CPUs)
+       Intel VT-x / Intel Virtualization Technology  (Intel CPUs)
+  3. Set it to Enabled
+  4. Save and exit (F10)
+  5. After reboot run:  ls -la /dev/kvm  to confirm it exists
+
+
+  ════════════════════════════════════════
+  KVM SETUP — PROXMOX VM
+  ════════════════════════════════════════
+
+  If Umbrel is running as a Proxmox VM:
+
+  1. Shut down the Umbrel VM
+  2. Go to VM → Hardware → Processors → Edit
+  3. Change Type from x86-64-v2-AES to host
+  4. In Extra CPU Flags find nested-virt and click + to enable it
+  5. Click OK
+  6. Go to Options → Boot Order and make sure your disk is first
+     (changing CPU settings can sometimes reset boot order)
+  7. Start the VM and SSH in then verify:
+       ls -la /dev/kvm
+       Should show: crw-rw---- 1 root kvm 10, 232 ...
+
+  Once /dev/kvm exists, install the app from Umbrel App Store normally.
+
+
+  ════════════════════════════════════════
+  KVM SETUP — OTHER VM PLATFORMS
+  ════════════════════════════════════════
+
+  VMware:
+    VM Settings → CPU → enable Virtualize Intel VT-x/EPT or AMD-V/RVI
+
+  VirtualBox:
+    VBoxManage modifyvm "YourVM" --nested-hw-virt on
+
+  Cloud VPS:
+    Most cloud providers do NOT support nested virtualisation.
+    This app will not work on most cloud VPS providers.
+
+
+  ════════════════════════════════════════
+  ACCESSING WINDOWS 11
+  ════════════════════════════════════════
+
+  Browser (noVNC):   http://umbrel.local:8006
+  Remote Desktop:    umbrel.local:3389
+
+  Username: Docker
+  Password: admin
+
+  Windows installs automatically on first boot.
+  The first boot may take 10-20 minutes — this is normal.
+
+
+  ════════════════════════════════════════
+  TROUBLESHOOTING
+  ════════════════════════════════════════
+
+  App stuck at 1% or fails to install:
+  → KVM is not available. Follow KVM setup guide above.
+
+  error gathering device information while adding custom device /dev/kvm:
+  → Enable virtualisation in BIOS or Proxmox. See KVM setup above.
+
+  VM booting over network after CPU change in Proxmox:
+  → Fix boot order: Options → Boot Order → move disk to top.
+
+  Windows installation stuck or very slow:
+  → First boot takes 10-20 minutes. Be patient.
+  → Make sure you have at least 8 GB RAM free on your Umbrel host.
+
+developer: dockur
+website: https://github.com/dockur/windows
+dependencies: []
+repo: https://github.com/DanversKara/umbrel-community-app-store
+support: https://github.com/DanversKara/umbrel-community-app-store/issues
+gallery:
+  - https://raw.githubusercontent.com/dockur/windows/master/.github/screen.png
+releaseNotes: Initial release. Windows 11 Pro via dockur/windows. Access at umbrel.local:8006 or RDP on port 3389.
+defaultUsername: "Docker"
+defaultPassword: "admin"
+submitter: DanversKara
+submission: https://github.com/DanversKara/umbrel-community-app-store

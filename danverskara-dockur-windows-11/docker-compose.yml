@@ -1,0 +1,37 @@
+version: "3.7"
+
+# ─────────────────────────────────────────────────────────────────
+#  DanversKara – Windows 11 Pro (dockur/windows) for Umbrel
+#  Source: https://github.com/dockur/windows
+#
+#  Web UI  →  http://umbrel.local:8006
+#  RDP     →  umbrel.local:3389   (user: Docker  /  pass: admin)
+#
+#  ⚠  Host must have KVM:  ls /dev/kvm
+#     If missing:  sudo modprobe kvm-intel   (or kvm-amd)
+# ─────────────────────────────────────────────────────────────────
+
+services:
+  windows:
+    image: dockurr/windows
+    container_name: danverskara-dockur-windows-11
+    environment:
+      VERSION: "11"        # Windows 11 Pro  (7.2 GB download)
+      RAM_SIZE: "4G"
+      CPU_CORES: "2"
+      DISK_SIZE: "64G"
+      USERNAME: "Docker"
+      PASSWORD: "admin"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "8006:8006"        # Web VNC — open http://umbrel.local:8006
+      - "3389:3389/tcp"    # RDP
+      - "3389:3389/udp"
+    volumes:
+      - "${APP_DATA_DIR}/data:/storage"
+    stop_grace_period: 2m
+    restart: on-failure

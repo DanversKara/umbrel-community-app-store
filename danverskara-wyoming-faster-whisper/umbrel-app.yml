@@ -1,0 +1,36 @@
+manifestVersion: 1
+id: danverskara-wyoming-faster-whisper
+category: AI
+name: Wyoming Faster Whisper STT
+version: "3.0.2"
+tagline: Local speech-to-text for Home Assistant voice assistants
+description: >-
+  Wyoming Faster Whisper is a local speech-to-text (STT) engine powered by 
+  OpenAI's Whisper model, reimplemented using CTranslate2 for fast inference.
+  It integrates with Home Assistant via the Wyoming protocol on port 10300.
+
+
+  Enables fully offline voice recognition for your ESP32-S3-Box-3 and other 
+  Home Assistant voice hardware — no cloud, no API keys required.
+
+
+  Once installed, add it to Home Assistant under:
+  Settings → Devices & Services → Add Integration → Wyoming Protocol
+  Host: your Umbrel IP  |  Port: 10300
+
+
+  Pair with Wyoming Piper TTS for a complete local voice pipeline.
+
+developer: LinuxServer.io
+website: https://github.com/linuxserver/docker-faster-whisper
+dependencies: []
+repo: https://github.com/DanversKara/umbrel-community-app-store
+support: https://github.com/DanversKara/umbrel-community-app-store/issues
+port: 10300
+gallery:
+  - https://i.imgur.com/6JqW8Xm.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+submitter: DanversKara
+submission: https://github.com/DanversKara/umbrel-community-app-store

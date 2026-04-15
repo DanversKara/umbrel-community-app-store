@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  wyoming-piper:
+    image: rhasspy/wyoming-piper:latest
+    container_name: wyoming-piper
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - "${APP_DATA_DIR}/data:/data"
+    command: >-
+      --voice en_US-lessac-medium
+      --uri tcp://0.0.0.0:10200

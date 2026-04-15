@@ -1,0 +1,33 @@
+manifestVersion: 1
+id: danverskara-wyoming-piper
+category: AI
+name: Wyoming Piper TTS
+version: "1.5.0"
+tagline: Local text-to-speech for Home Assistant voice assistants
+description: >-
+  Wyoming Piper is a local text-to-speech (TTS) engine that integrates with 
+  Home Assistant via the Wyoming protocol. It enables fully offline AI voice 
+  responses for your ESP32-S3-Box-3 and other voice assistant hardware — 
+  no cloud required.
+
+
+  Once installed, add it to Home Assistant under:
+  Settings → Devices & Services → Add Integration → Wyoming Protocol
+  Host: your Umbrel IP  |  Port: 10200
+
+
+  Pair with Wyoming Faster Whisper STT for a complete local voice pipeline.
+
+developer: Rhasspy
+website: https://github.com/rhasspy/wyoming-piper
+dependencies: []
+repo: https://github.com/DanversKara/umbrel-community-app-store
+support: https://github.com/DanversKara/umbrel-community-app-store/issues
+port: 10200
+gallery:
+  - https://i.imgur.com/6JqW8Xm.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+submitter: DanversKara
+submission: https://github.com/DanversKara/umbrel-community-app-store

@@ -1,0 +1,148 @@
+manifestVersion: 1
+id: danverskara-bluesky
+name: Bluesky PDS
+tagline: Bluesky PDS (Personal Data Server)
+icon: https://ps.w.org/social-integration-for-bluesky/assets/icon.svg?rev=3214198
+category: Networking
+version: "Latest"
+port: 2583
+description: >-
+  Self-hosting a Bluesky PDS means running your own Personal Data Server
+  that is capable of federating with the wider Bluesky social network.
+
+
+  ════════════════════════════════════════
+  PREREQUISITES
+  ════════════════════════════════════════
+
+  - A running Umbrel instance
+  - A REAL public domain name (e.g. bsky.yourdomain.com)
+    .local hostnames will NOT work
+  - HTTPS access to that domain (Cloudflare Tunnel is recommended)
+
+
+  ════════════════════════════════════════
+  STEP 1 — CONFIGURE YOUR DOMAIN
+  ════════════════════════════════════════
+
+  After installing, SSH into Umbrel and edit the docker-compose.yml:
+
+    nano ~/umbrel/app-data/danverskara-bluesky/docker-compose.yml
+
+  Set your real domain:
+
+    PDS_HOSTNAME=bsky.yourdomain.com
+
+  The PDS will refuse to start if PDS_HOSTNAME ends in .local or is
+  not a real public domain.
+
+
+  ════════════════════════════════════════
+  STEP 2 — SET SECURE PASSWORDS
+  ════════════════════════════════════════
+
+  Change the default placeholder values in docker-compose.yml:
+
+    PDS_ADMIN_PASSWORD=your_strong_password
+    PDS_JWT_SECRET=your_random_secret_string
+
+  Do NOT leave these as the defaults.
+
+
+  ════════════════════════════════════════
+  STEP 3 — GENERATE A PLC ROTATION KEY
+  ════════════════════════════════════════
+
+  This key is REQUIRED by recent versions of the atproto PDS.
+  Run this on Umbrel via SSH:
+
+    openssl ecparam -name secp256k1 -genkey -noout -out /dev/stdout \
+      | openssl ec -text -noout 2>/dev/null \
+      | grep priv -A 3 | tail -3 \
+      | tr -d ' \n:' | sed 's/^00//'
+
+  Copy the output and set it in docker-compose.yml:
+
+    PDS_PLC_ROTATION_KEY_K256_PRIVATE_KEY_HEX=your_key_here
+
+  ⚠️ Keep this key safe and secret. If you lose it you lose control
+  of your PDS identity. Back it up somewhere safe.
+
+
+  ════════════════════════════════════════
+  STEP 4 — EXPOSE YOUR PDS PUBLICLY
+  ════════════════════════════════════════
+
+  The PDS must be reachable over HTTPS for federation with the
+  Bluesky network. Cloudflare Tunnel is the recommended free option
+  and requires no port forwarding.
+
+  In Umbrel go to:
+    Settings → Advanced Settings → Cloudflare Tunnel
+
+  Follow the setup wizard and point a tunnel route at:
+    localhost:2583  →  bsky.yourdomain.com
+
+
+  ════════════════════════════════════════
+  STEP 5 — CREATE YOUR FIRST ACCOUNT
+  ════════════════════════════════════════
+
+  Once the PDS is running, generate an invite code via SSH:
+
+    curl -X POST http://YOUR-UMBREL-IP:2583/xrpc/com.atproto.server.createInviteCode \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Basic $(echo -n 'admin:YOUR_ADMIN_PASSWORD' | base64)" \
+      -d '{"useCount": 1}'
+
+  Then create your account using the returned invite code:
+
+    curl -X POST http://YOUR-UMBREL-IP:2583/xrpc/com.atproto.server.createAccount \
+      -H "Content-Type: application/json" \
+      -d '{
+        "email": "you@example.com",
+        "handle": "yourname.bsky.yourdomain.com",
+        "password": "yourpassword",
+        "inviteCode": "your-invite-code-here"
+      }'
+
+
+  ════════════════════════════════════════
+  STEP 6 — LOG IN ON BLUESKY
+  ════════════════════════════════════════
+
+  1. Open bsky.app or the Bluesky mobile app
+  2. Tap Sign in
+  3. Tap Hosting provider and change it from bsky.social to
+     bsky.yourdomain.com
+  4. Enter your handle and password
+
+
+  ════════════════════════════════════════
+  TROUBLESHOOTING
+  ════════════════════════════════════════
+
+  Must configure plc rotation key:
+  → Add PDS_PLC_ROTATION_KEY_K256_PRIVATE_KEY_HEX to docker-compose.yml
+    (see Step 3 above)
+
+  Domain name must not end with .local:
+  → Set PDS_HOSTNAME to a real public domain (see Step 1 above)
+
+  InvalidInviteCode:
+  → Generate an invite code first (see Step 5 above)
+
+  App not showing in community store:
+  → Check that the app id in umbrel-app.yml matches the folder name
+    and that it is listed in umbrel-app-store.yml
+
+developer: Bluesky Social PBC
+website: https://bsky.social/
+submitter: HueViridian
+submission: https://github.com/bluesky-social
+repo: https://github.com/bluesky-social
+gallery:
+  - https://hyprlab.co/content/images/size/w1200/2024/11/featured_bluesky-pds.jpg
+  - https://outilstice.com/wp-content/uploads/2024/11/bluesky.jpg.webp
+dependencies: []
+path: ""

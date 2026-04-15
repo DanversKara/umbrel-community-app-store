@@ -1,0 +1,28 @@
+id: danverskara
+name: DanversKara
+
+apps:
+  - id: danverskara-dockur-windows-11
+    name: Windows 11 Pro
+    description: Run Windows 11 Pro in a container on your Umbrel
+    path: danverskara-dockur-windows-11
+
+  - id: danverskara-bluesky
+    name: Bluesky PDS
+    description: Self-hosted Bluesky Personal Data Server
+    path: danverskara-bluesky
+
+  - id: danverskara-url-shortener
+    name: Premium URL Shortener
+    description: Self-hosted URL shortener with bio pages and QR codes
+    path: danverskara-url-shortener
+
+  - id: danverskara-wyoming-piper
+    name: Wyoming Piper TTS
+    description: Local text-to-speech for Home Assistant voice assistants
+    path: danverskara-wyoming-piper
+
+  - id: danverskara-wyoming-faster-whisper
+    name: Wyoming Faster Whisper STT
+    description: Local speech-to-text for Home Assistant voice assistants
+    path: danverskara-wyoming-faster-whisper

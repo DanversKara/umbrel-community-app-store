@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  faster-whisper:
+    image: lscr.io/linuxserver/faster-whisper:latest
+    container_name: faster-whisper
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - "${APP_DATA_DIR}/config:/config"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - WHISPER_MODEL=tiny-int8
+      - WHISPER_BEAM=1
+      - WHISPER_LANG=en
