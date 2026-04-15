@@ -1,32 +1,71 @@
-version: '3'
 services:
-  web:
-    build: .
-    container_name: urlshortener_web
-    restart: unless-stopped
-    # No ports section here! Umbrel manages this.
-    volumes:
-      - /data/storage/apps/danverskara-url-shortener/app:/var/www/html
-    environment:
-      - WEB_DOCUMENT_ROOT=/var/www/html/public
-    depends_on:
-      - db
-    networks:
-      - default
 
+  # ── PUBLIC ────────────────────────────────────────────────────────────────
+  # Expose this port via Cloudflare Tunnel → Nginx Proxy Manager
+  app:
+    build: .
+    container_name: danverskara-url-shortener_app_1
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT}:80"
+    volumes:
+      - "${APP_DATA_DIR}/app:/var/www/html"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: shortener
+      DB_USER: shortener
+      DB_PASS: ${APP_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - shortener-net
+
+  # ── ADMIN (LOCAL ONLY) ────────────────────────────────────────────────────
+  # Do NOT expose this port in Cloudflare Tunnel or NPM.
+  # Access only from inside your home network: http://umbrel.local:3003
+  admin:
+    build: .
+    container_name: danverskara-url-shortener_admin_1
+    restart: unless-stopped
+    ports:
+      - "3003:80"
+    volumes:
+      - "${APP_DATA_DIR}/app:/var/www/html"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: shortener
+      DB_USER: shortener
+      DB_PASS: ${APP_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - shortener-net
+
+  # ── DATABASE ──────────────────────────────────────────────────────────────
   db:
     image: mariadb:11
-    container_name: urlshortener_db
+    container_name: danverskara-url-shortener_db_1
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: ${APP_PASSWORD}
       MYSQL_DATABASE: shortener
       MYSQL_USER: shortener
-      MYSQL_PASSWORD: shortenerpass
+      MYSQL_PASSWORD: ${APP_PASSWORD}
     volumes:
-      - /data/storage/apps/danverskara-url-shortener/db:/var/lib/mysql
+      - "${APP_DATA_DIR}/db:/var/lib/mysql"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     networks:
-      - default
+      - shortener-net
 
 networks:
-  default:
+  shortener-net:
+    driver: bridge
