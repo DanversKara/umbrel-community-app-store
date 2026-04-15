@@ -267,7 +267,7 @@ Once your files are uploaded, import your database backup (`.sql` file) by runni
 
 ```bash
 docker exec -i urlshortener_db mariadb -u shortener -pshortenerpass shortener < /data/storage/apps/danverskara-url-shortener/app/your-db-dump.sql
-
+```
 ---
 
 ## 📄 License
