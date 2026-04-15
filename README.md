@@ -12,7 +12,7 @@ A community app store for [Umbrel](https://umbrel.com) with self-hosted apps inc
 |-----|--------|-------------|
 | **Bluesky PDS** | ✅ Half Working | Self-hosted Bluesky Personal Data Server |
 | **Windows 11 Dockur** | ✅ Working | Self-hosted Windows 11 via KVM/QEMU in Docker |
-| **Premium URL Shortener** | ✅ Working | Personal wrapper — requires your own GemPixel license |
+| **Premium URL Shortener** | ❌ Not Working - i got lazy | Personal wrapper — requires your own GemPixel license |
 | **Wyoming Piper TTS** | 10200 | Local text-to-speech for Home Assistant (AI voice) |
 | **Wyoming Faster Whisper STT** | 10300 | Local speech-to-text for Home Assistant (AI voice) |
 
