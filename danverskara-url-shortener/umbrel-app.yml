@@ -3,7 +3,7 @@ id: danverskara-url-shortener
 name: Premium URL Shortener wrapper
 tagline: Requires separate software purchase from GemPixel.
 icon:
-category: Networking
+category: utilities
 version: "Latest"
 description: >-
   ⚠️ Legal Notice & Software Licensing
@@ -26,7 +26,7 @@ Licensing Terms https://gempixel.com/licenses
 This wrapper is provided as-is for the convenience of the community. The maintainer of this repository is not affiliated with GemPixel and does not distribute or sell their proprietary software.*
 
 
-developer: DanversKara
+developer: Danvers Kara
 website: https://github.com/DanversKara/
 submitter: DanversKara
 submission: https://github.com/DanversKara/umbrel-community-app-store
