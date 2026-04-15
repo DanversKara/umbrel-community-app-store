@@ -12,17 +12,17 @@ This project provides the necessary infrastructure, environment configurations, 
 
 Please be advised of the following
 
-Source Code: This repository does not contain the proprietary source code, binaries, or database schemas of the Premium URL Shortener.
+Source Code This repository does not contain the proprietary source code, binaries, or database schemas of the Premium URL Shortener.
 
-Licensing: To utilize this wrapper, you must possess a valid license and the official software package provided by GemPixel.
+Licensing To utilize this wrapper, you must possess a valid license and the official software package provided by GemPixel.
 
-Acquisition: The software must be purchased directly from the official developer. 
+Acquisition The software must be purchased directly from the official developer. 
 
-You can acquire the software and review the licensing terms here:
-Purchase Product: https://gempixel.com/products/premium-url-shortener
-Licensing Terms: https://gempixel.com/licenses
+You can acquire the software and review the licensing terms here
+Purchase Product https://gempixel.com/products/premium-url-shortener
+Licensing Terms https://gempixel.com/licenses
 
-This wrapper is provided "as-is" for the convenience of the community. The maintainer of this repository is not affiliated with GemPixel and does not distribute or sell their proprietary software.*
+This wrapper is provided as-is for the convenience of the community. The maintainer of this repository is not affiliated with GemPixel and does not distribute or sell their proprietary software.*
 
 developer: DanversKara
 website: https://github.com/dockur/windows
