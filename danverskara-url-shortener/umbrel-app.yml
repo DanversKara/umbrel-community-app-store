@@ -46,11 +46,18 @@ releaseNotes: >-
   v1.1.0 — Complete architecture rewrite.
   
   - ReadMe.Md GemPixel license/Files Requirement https://github.com/DanversKara/umbrel-community-app-store/blob/main/danverskara-url-shortener/ReadMe.md
+  
   - Replaced broken setup container with real two-port design (public + admin)
+  
   - Fixed Dockerfile (was a docker exec command, now a real PHP 8.2 build)
+  
   - Installs all required extensions: pdo_mysql, gd, imagick, mbstring, zip
+  
   - Apache DocumentRoot correctly pointed at /public subfolder
+  
   - Removed dependency on non-existent danverskara/url-shortener-setup image
+  
   - Admin panel (port 3003) stays local — never hits Cloudflare or NPM
+  
 submitter: DanversKara
 submission: https://github.com/DanversKara/umbrel-community-app-store
