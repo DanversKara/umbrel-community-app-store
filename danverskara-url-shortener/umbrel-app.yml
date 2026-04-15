@@ -7,7 +7,7 @@ category: Networking
 version: "1.0.0"
 port: 3002
 description: >-
-  A self-hosted Personal wrapper — requires your own GemPixel license and files from GemPixel (Go Read The README.MD BELOW for more info) powered by PHP 8.2 + MariaDB 11.
+  A self-hosted Personal wrapper — requires your own GemPixel license/files (click on SOURCE CODE/REPO LINK somewhere below to learn more) powered by PHP 8.2 + MariaDB 11.
 
 
   TWO-PORT DESIGN:
@@ -45,7 +45,7 @@ gallery:
 releaseNotes: >-
   v1.1.0 — Complete architecture rewrite.
   
-  - README.MD GemPixel license/Files Requiremen, click on SOURCE CODE/REPO LINK Above to view README.MD
+  - README.MD GemPixel license/Files Requiremen, click on SOURCE CODE/REPO LINK somewhere above to learn more
   
   - Replaced broken setup container with real two-port design (public + admin)
   
