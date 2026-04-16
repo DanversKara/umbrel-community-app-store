@@ -7,6 +7,54 @@
 A professional, self-hosted, high-performance URL shortening service designed specifically for the Umbrel ecosystem. Take full control of your links, track your analytics, and maintain your privacy without relying on third-party services.
 
 ---
+# HOW TO SETUP
+
+ TWO-PORT DESIGN:
+  - Public port (shown below): Add this to Cloudflare Tunnel + Nginx Proxy
+    Manager for external access.
+
+  - Admin port 3003 (local only): Full access for admin tasks.
+    Access via http://umbrel.local:3003 — do NOT add to Cloudflare or NPM.
+
+  - SSH into Umbrel:
+    cd ~/umbrel/app-data/danverskara-url-shortener/app/
+
+ Transfer Files from computer with files:
+  - sudo chmod 777 ~/umbrel/app-data/danverskara-url-shortener/app/
+  - ssh umbrel@192.168.1.35
+ sudo mv ~/main.zip ~/umbrel/app-data/danverskara-url-shortener/app/
+ cd ~/umbrel/app-data/danverskara-url-shortener/app/
+ sudo unzip main.zip
+
+  - Install unzip
+ sudo apt update
+ sudo apt install unzip -y
+
+  - Get DB Password
+ sudo docker inspect danverskara-url-shortener_db_1 | grep -i password
+
+  - must fix DB Password
+ sudo nano ~/umbrel/app-data/danverskara-url-shortener/app/config.php
+
+  - Must get new DB Password
+ sudo docker exec -i danverskara-url-shortener_db_1 \
+  mariadb -u shortener -p"PASSWORD" shortener \
+  < ~/umbrel/app-data/danverskara-url-shortener/app/urlshortener-db-20260414.sql
+
+ - Must Fix
+sudo chown -R www-data:www-data ~/umbrel/app-data/danverskara-url-shortener/app/
+sudo chmod -R 755 ~/umbrel/app-data/danverskara-url-shortener/app/
+sudo chmod -R 777 ~/umbrel/app-data/danverskara-url-shortener/app/storage
+sudo mkdir -p ~/umbrel/app-data/danverskara-url-shortener/app/storage/cache
+sudo chmod -R 777 ~/umbrel/app-data/danverskara-url-shortener/app/storage/cache
+
+ - Now Setup NPM and Cloudflare Tunnels
+ - Cloudflare http://192.168.1.35:40080
+ - NPM http 192.168.1.35 (get port right app click troubleshoot) port
+ - Now Right Click Restart App or Reboot server.
+ - Website should be live.
+
+---
 
 ## ✨ Features
 - **Custom Aliases:** Create short, memorable links for your brand.
