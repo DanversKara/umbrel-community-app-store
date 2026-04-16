@@ -10,30 +10,8 @@ description: >-
   A self-hosted Personal wrapper — requires your own GemPixel license/files (click on SOURCE CODE/REPO LINK somewhere below to learn more) powered by PHP 8.2 + MariaDB 11.
 
 
-  TWO-PORT DESIGN:
-
-  - Port shown below (APP_PORT): Public-facing shortener. Add this to your
-    Cloudflare Tunnel and Nginx Proxy Manager.
-
-  - Port 3003 (Admin — local only): Full app access for admin tasks.
-    DO NOT expose this in Cloudflare or NPM. Access via http://umbrel.local:3003
-
-
-  FIRST-RUN SETUP:
-
-  1. Place your GemPixel app files into:
-     ~/umbrel/app-data/danverskara-url-shortener/app/
-
-  2. Edit config.php — set DBhost to "db", DBname/DBuser/DBpassword to
-     "shortener" / "shortener" / your Umbrel app password.
-
-  3. Import your SQL dump:
-     docker exec -i danverskara-url-shortener_db_1 \
-       mariadb -u shortener -p<password> shortener < your-dump.sql
-
-  4. Fix permissions:
-     docker exec danverskara-url-shortener_app_1 \
-       chown -R www-data:www-data /var/www/html
+  HOW TO SET ME UP:
+   - CHECK THE README.MD FOR HOW TO SETUP NOTES, CLICK ON Repo or Source Code Link on this page somewhere to go read it.
 
 developer: DanversKara
 website: https://github.com/DanversKara/umbrel-community-app-store
