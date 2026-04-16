@@ -21,7 +21,7 @@ support: https://github.com/DanversKara/umbrel-community-app-store/issues
 gallery:
   - https://raw.githubusercontent.com/DanversKara/umbrel-community-app-store/main/danverskara-url-shortener/gallery/1.png
 releaseNotes: >-
-  v1.1.0 — Complete architecture rewrite.
+  v1.0.0 — Complete architecture rewrite.
   
   - README.MD GemPixel license/Files Requiremen, click on SOURCE CODE/REPO LINK somewhere above to learn more
   
