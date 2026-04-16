@@ -9,13 +9,6 @@ A professional, self-hosted, high-performance URL shortening service designed sp
 ---
 # HOW TO SETUP
 
- TWO-PORT DESIGN:
-  - Public port (shown below): Add this to Cloudflare Tunnel + Nginx Proxy
-    Manager for external access.
-
-  - Admin port 3003 (local only): Full access for admin tasks.
-    Access via http://umbrel.local:3003 — do NOT add to Cloudflare or NPM.
-
   - SSH into Umbrel:
     cd ~/umbrel/app-data/danverskara-url-shortener/app/
 
