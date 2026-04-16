@@ -13,15 +13,17 @@ A professional, self-hosted, high-performance URL shortening service designed sp
     cd ~/umbrel/app-data/danverskara-url-shortener/app/
 
  Transfer Files from computer with files:
-  - sudo chmod 777 ~/umbrel/app-data/danverskara-url-shortener/app/
-  - ssh umbrel@192.168.1.35
- sudo mv ~/main.zip ~/umbrel/app-data/danverskara-url-shortener/app/
- cd ~/umbrel/app-data/danverskara-url-shortener/app/
- sudo unzip main.zip
-
+  - UmbrelOS ssh umbrel@192.168.1.35
+    -- sudo chmod 777 ~/umbrel/app-data/danverskara-url-shortener/app/
+  - Other Computer where main.zip is located
+    -- scp main.zip umbrel@192.168.1.35:~/umbrel/app-data/danverskara-url-shortener/app/
+  
   - Install unzip
- sudo apt update
- sudo apt install unzip -y
+    -- sudo apt update
+    -- sudo apt install unzip -y
+  - UmbrelOS ssh umbrel@192.168.1.35
+    -- cd ~/umbrel/app-data/danverskara-url-shortener/app/
+    -- sudo unzip main.zip
 
   - Get DB Password
  sudo docker inspect danverskara-url-shortener_db_1 | grep -i password
