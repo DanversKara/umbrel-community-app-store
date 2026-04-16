@@ -1,0 +1,51 @@
+manifestVersion: 1
+id: danverskara-url-shortener
+name: Premium URL Shortener
+tagline: Self-hosted link shortener with analytics and custom slugs
+icon: https://raw.githubusercontent.com/DanversKara/umbrel-community-app-store/main/danverskara-url-shortener/icon.png
+category: Networking
+version: "1.1.0"
+port: 3002
+description: >-
+  A self-hosted Premium URL Shortener powered by PHP 8.2 + MariaDB 11.
+
+
+  TWO-PORT DESIGN:
+
+  - Public port (shown below): Add this to Cloudflare Tunnel + Nginx Proxy
+    Manager for external access.
+
+  - Admin port 3003 (local only): Full access for admin tasks.
+    Access via http://umbrel.local:3003 — do NOT add to Cloudflare or NPM.
+
+
+  FIRST-RUN SETUP (SSH into Umbrel):
+
+  1. Copy your GemPixel app files into:
+       ~/umbrel/app-data/danverskara-url-shortener/app/
+
+  2. Set config.php: DBhost=db, DBname/DBuser/DBpass=shortener/<your password>
+
+  3. Import your SQL dump:
+       docker exec -i danverskara-url-shortener_db_1 \
+         mariadb -u shortener -p<password> shortener < your-dump.sql
+
+  4. Fix permissions:
+       docker exec danverskara-url-shortener_app_1 \
+         chown -R www-data:www-data /app
+
+developer: DanversKara
+website: https://github.com/DanversKara/umbrel-community-app-store
+dependencies: []
+repo: https://github.com/DanversKara/umbrel-community-app-store
+support: https://github.com/DanversKara/umbrel-community-app-store/issues
+gallery:
+  - https://raw.githubusercontent.com/DanversKara/umbrel-community-app-store/main/danverskara-url-shortener/gallery/1.png
+releaseNotes: >-
+  v1.1.0 — Architecture rewrite.
+  - Removed Dockerfile (Umbrel cannot build images — must use pre-built)
+  - Replaced broken setup container with real two-port design (app + admin)
+  - Both containers use webdevops/php-apache:8.2 with all required extensions
+  - Public port exposed via APP_PORT, admin locked to port 3003 (LAN only)
+submitter: DanversKara
+submission: https://github.com/DanversKara/umbrel-community-app-store
