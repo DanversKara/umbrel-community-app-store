@@ -1,18 +1,19 @@
 services:
 
-  # ── PUBLIC ────────────────────────────────────────────────────────────────
-  # Expose this port via Cloudflare Tunnel → Nginx Proxy Manager
+  # ── PUBLIC ─────────────────────────────────────────────────────────────
+  # Expose APP_PORT via Cloudflare Tunnel → Nginx Proxy Manager
   app:
-    build: .
+    image: webdevops/php-apache:8.2
     container_name: danverskara-url-shortener_app_1
     restart: unless-stopped
     ports:
       - "${APP_PORT}:80"
     volumes:
-      - "${APP_DATA_DIR}/app:/var/www/html"
+      - "${APP_DATA_DIR}/app:/app"
     environment:
+      WEB_DOCUMENT_ROOT: /app/public
       DB_HOST: db
-      DB_PORT: 3306
+      DB_PORT: "3306"
       DB_NAME: shortener
       DB_USER: shortener
       DB_PASS: ${APP_PASSWORD}
@@ -22,20 +23,21 @@ services:
     networks:
       - shortener-net
 
-  # ── ADMIN (LOCAL ONLY) ────────────────────────────────────────────────────
-  # Do NOT expose this port in Cloudflare Tunnel or NPM.
-  # Access only from inside your home network: http://umbrel.local:3003
+  # ── ADMIN (LOCAL ONLY) ──────────────────────────────────────────────────
+  # Do NOT add port 3003 to Cloudflare or NPM.
+  # Access only from inside your LAN: http://umbrel.local:3003
   admin:
-    build: .
+    image: webdevops/php-apache:8.2
     container_name: danverskara-url-shortener_admin_1
     restart: unless-stopped
     ports:
       - "3003:80"
     volumes:
-      - "${APP_DATA_DIR}/app:/var/www/html"
+      - "${APP_DATA_DIR}/app:/app"
     environment:
+      WEB_DOCUMENT_ROOT: /app/public
       DB_HOST: db
-      DB_PORT: 3306
+      DB_PORT: "3306"
       DB_NAME: shortener
       DB_USER: shortener
       DB_PASS: ${APP_PASSWORD}
@@ -45,7 +47,7 @@ services:
     networks:
       - shortener-net
 
-  # ── DATABASE ──────────────────────────────────────────────────────────────
+  # ── DATABASE ────────────────────────────────────────────────────────────
   db:
     image: mariadb:11
     container_name: danverskara-url-shortener_db_1
