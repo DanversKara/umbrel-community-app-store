@@ -13,7 +13,7 @@ apps:
     path: danverskara-bluesky
 
   - id: danverskara-url-shortener
-    name: Premium URL Shortener
+    name: URL Shortener Wrapper
     description: Self-hosted URL shortener with bio pages and QR codes
     path: danverskara-url-shortener
 
