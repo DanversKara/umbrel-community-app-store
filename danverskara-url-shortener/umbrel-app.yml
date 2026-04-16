@@ -7,11 +7,11 @@ category: Networking
 version: "1.0.0"
 port: 3002
 description: >-
-  A self-hosted Personal wrapper — requires your own GemPixel license/files (click on SOURCE CODE/REPO LINK somewhere below to learn more) powered by PHP 8.2 + MariaDB 11.
+  A self-hosted Personal wrapper webserver and database — requires your own GemPixel license & files (click on SOURCE CODE LINK to learn How & Where to buy) powered by PHP 8.2 + MariaDB 11.
 
 
   HOW TO SET ME UP:
-   - CHECK THE README.MD FOR HOW TO SETUP NOTES, CLICK ON Repo or Source Code Link on this page somewhere to go read it.
+   - Click on Source Code Link on this page somewhere to go read it.
 
 developer: DanversKara
 website: https://github.com/DanversKara/umbrel-community-app-store
