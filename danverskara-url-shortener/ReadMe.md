@@ -56,35 +56,6 @@ sudo chmod -R 777 ~/umbrel/app-data/danverskara-url-shortener/app/storage/cache
 
 ---
 
-## ✨ Features
-- **Custom Aliases:** Create short, memorable links for your brand.
-- **Detailed Analytics:** Track clicks and visitor data in real-time.
-- **Self-Hosted:** Your data never leaves your Umbrel server.
-- **High Performance:** Optimized for PHP 8.2 and MariaDB 11.
-- **Privacy First:** No tracking scripts or third-party cookies.
-
-## 📦 Installation
-
-### 1. Install via Umbrel App Store
-If you have added the DanversKara community store to your Umbrel:
-1. Open your **Umbrel Dashboard**.
-2. Navigate to the **App Store**.
-3. Find **Premium URL Shortener** and click **Install**.
-
-### 2. Post-Installation Setup (Required)
-Because this is a premium application, the core source files and database are not bundled in the public store repository for security and licensing reasons. You must upload your files manually.
-
-#### 📂 Uploading Application Files
-Use SFTP or the Umbrel terminal to upload your application files to the following directory:
-` /data/storage/apps/danverskara-url-shortener/app `
-
-#### 🗄️ Importing the Database
-Once your files are uploaded, import your database backup (`.sql` file) by running the following command from your Umbrel terminal:
-
-```bash
-docker exec -i urlshortener_db mariadb -u shortener -pshortenerpass shortener < /data/storage/apps/danverskara-url-shortener/app/your-db-dump.sql
-```
-
 ⚠️ Legal Notice & Software Licensing
 This repository is a Deployment Wrapper only.
 
