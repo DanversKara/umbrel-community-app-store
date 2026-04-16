@@ -35,7 +35,8 @@ releaseNotes: >-
   
   - Removed dependency on non-existent danverskara/url-shortener-setup image
   
-  - Admin panel (port 3003) stays local — never hits Cloudflare or NPM
+  - Removed Admin panel (port 3002) that stayed local — never hits Cloudflare or NPM (now setups thru ssh/scp more secure)
+  - a lot has changed that isnt added here nor on readme.md might update all that later.
   
 submitter: DanversKara
 submission: https://github.com/DanversKara/umbrel-community-app-store
